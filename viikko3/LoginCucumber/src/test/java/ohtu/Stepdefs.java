@@ -10,6 +10,7 @@ import static org.junit.Assert.*;
 import ohtu.io.*;
 import ohtu.data_access.*;
 import ohtu.services.*;
+import ohtu.domain.*;
 
 public class Stepdefs {
     App app;
@@ -39,10 +40,8 @@ public class Stepdefs {
     public void commandUserCreatedSelected(String username, String password) throws Throwable {
       inputLines.add(username);
       inputLines.add(password);
-      
-      io = new StubIO(inputLines); 
-      app = new App(io, auth);
-      app.run();
+    
+      userDao.add(new User(username, password));
     }
 
     @When("username {string} and password {string} are entered")
